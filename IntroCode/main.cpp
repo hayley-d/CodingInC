@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Cookie.h"
+#include "Student.h"
 
 using namespace std; //VERY IMPORTANT LINE
 
@@ -37,6 +38,11 @@ int main() {
     //Declared new cookie object pointer
     Cookie* cookie1 = new Cookie("Matcha",1.45);
     cookie1->bake();
+
+    Student* student = new Student("Hayley","Dodkins",22,"Computer Science");
+    std::cout << "Student Number: " << student->getStudentNumber() << std::endl;
+    std::cout << "Student Name: " << student->getName() << std::endl;
+    std::cout << "Student Degree: " << student->getDegree() << std::endl;
 
     return 0;
 }
