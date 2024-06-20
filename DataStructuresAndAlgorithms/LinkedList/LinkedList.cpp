@@ -25,7 +25,9 @@ LinkedList::LinkedList(int value) {
     this->length = 1;
 }
 
+//destructor
 LinkedList::~LinkedList() {
+    // Need to go through an manually delete all the nodes in the list
     Node* temp = head;
     while (head) {
         head = head->next;
@@ -40,5 +42,44 @@ void LinkedList::printList() {
         std::cout<<temp->value<<std::endl;
         temp = temp->next;
     }
+    delete temp;
 }
+
+bool LinkedList::contains(int value) {
+    if(this->length == 0) {
+        return false;
+    }
+
+    Node* temp = this->head;
+
+    while(temp) {
+        if(temp->value == value) {
+            delete temp;
+            return true;
+        }
+    }
+    delete temp;
+    return false;
+}
+
+/*
+ * Add the node to the end of the list
+ */
+void LinkedList::append(int value) {
+    //Check if the list is empty
+    if(this->head == nullptr) {
+        this->head = new Node(value);
+        this->tail = head;
+    }
+    else {
+        if(contains(value)) {
+            return;
+        }
+        tail->next = new Node(value);
+        tail = tail->next;
+    }
+    length++;
+}
+
+
 
