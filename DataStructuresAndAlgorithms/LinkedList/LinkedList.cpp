@@ -28,7 +28,7 @@ LinkedList::LinkedList(int value) {
 //destructor
 LinkedList::~LinkedList() {
     // Need to go through an manually delete all the nodes in the list
-    Node* temp = head;
+    Node *temp = head;
     while (head) {
         head = head->next;
         delete temp;
@@ -37,22 +37,22 @@ LinkedList::~LinkedList() {
 }
 
 void LinkedList::printList() {
-    Node* temp = this->head;
-    while(temp) {
-        std::cout<<temp->value<<std::endl;
+    Node *temp = this->head;
+    while (temp) {
+        std::cout << temp->value << std::endl;
         temp = temp->next;
     }
 }
 
 bool LinkedList::contains(int value) {
-    if(this->length == 0) {
+    if (this->length == 0) {
         return false;
     }
 
-    Node* temp = this->head;
+    Node *temp = this->head;
 
-    while(temp) {
-        if(temp->value == value) {
+    while (temp) {
+        if (temp->value == value) {
             return true;
         }
     }
@@ -64,12 +64,11 @@ bool LinkedList::contains(int value) {
  */
 void LinkedList::append(int value) {
     //Check if the list is empty
-    if(this->head == nullptr) {
+    if (this->head == nullptr) {
         this->head = new Node(value);
         this->tail = head;
-    }
-    else {
-        if(contains(value)) {
+    } else {
+        if (contains(value)) {
             return;
         }
         tail->next = new Node(value);
@@ -82,20 +81,19 @@ int LinkedList::removeLast() {
     int num = -1;
 
     //check if the list is empty
-    if(head == nullptr) {
+    if (head == nullptr) {
         return -1;
     }
 
-    if(length == 1) {
+    if (length == 1) {
         //Only one element in the list
         num = head->value;
         delete head;
         head = nullptr;
         tail = nullptr;
-    }
-    else {
-        Node* temp = this->head;
-        while(temp->next->next != nullptr) {
+    } else {
+        Node *temp = this->head;
+        while (temp->next->next != nullptr) {
             temp = temp->next;
         }
 
@@ -110,6 +108,103 @@ int LinkedList::removeLast() {
     return num;
 }
 
+int LinkedList::removeFirst() {
+    //Check if the list is empty
+    int num = -1;
+    if (head == nullptr) {
+        return -1;
+    }
+    num = head->value;
+    if (length == 1) {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    } else {
+        Node *temp = head->next;
+        delete head;
+        head = temp;
+    }
+    length--;
+    return num;
+}
 
+void LinkedList::prepend(int value) {
+    if (!contains(value)) {
+        Node *newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
+        if (length == 0) {
+            tail = head;
+        }
+        length++;
+    }
+}
 
+int LinkedList::removeValue(int value) {
+    if(head == nullptr) {
+        return -1;
+    }
+
+    Node *temp = head;
+    Node *prev = nullptr;
+
+    while (temp) {
+        if (temp->value == value) {
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // If the value is not found, return -1
+    if (temp == nullptr) {
+        return -1;
+    }
+
+    //temp is the node to delete
+
+    if (temp == head) {
+        //delete the head
+        head = head->next;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+    }  else {
+        // Deleting a middle or tail node
+        prev->next = temp->next;
+        if (temp == tail) {
+            tail = prev;
+        }
+    }
+
+    delete temp;
+    length--;
+    return value;
+}
+
+bool LinkedList::insert(int index, int value) {
+    if(length < index || index < 0) {
+        return false;
+    }
+
+    if(index == 0) {
+        prepend(value);
+    }
+    else if(index == length) {
+         append(value);
+     }
+    else {
+        Node* temp = head;
+        Node* prev = nullptr;
+
+        for(int i = 0; i < index; i++) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        prev->next = new Node(value,temp);
+        length++;
+    }
+    return true;
+}
 
