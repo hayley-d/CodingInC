@@ -78,5 +78,38 @@ void LinkedList::append(int value) {
     length++;
 }
 
+int LinkedList::removeLast() {
+    int num = -1;
+
+    //check if the list is empty
+    if(head == nullptr) {
+        return -1;
+    }
+
+    if(length == 1) {
+        //Only one element in the list
+        num = head->value;
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    }
+    else {
+        Node* temp = this->head;
+        while(temp->next->next != nullptr) {
+            temp = temp->next;
+        }
+
+        //temp next node is the last node
+        //temp will become the new tail node
+        num = temp->next->value; //get the value of the last node
+        delete temp->next;
+        temp->next = nullptr;
+        tail = temp;
+    }
+    length--;
+    return num;
+}
+
+
 
 
