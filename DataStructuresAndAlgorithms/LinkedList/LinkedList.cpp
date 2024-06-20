@@ -141,7 +141,7 @@ void LinkedList::prepend(int value) {
 }
 
 int LinkedList::removeValue(int value) {
-    if(head == nullptr) {
+    if (head == nullptr) {
         return -1;
     }
 
@@ -169,7 +169,7 @@ int LinkedList::removeValue(int value) {
         if (head == nullptr) {
             tail = nullptr;
         }
-    }  else {
+    } else {
         // Deleting a middle or tail node
         prev->next = temp->next;
         if (temp == tail) {
@@ -182,17 +182,15 @@ int LinkedList::removeValue(int value) {
     return value;
 }
 
-bool LinkedList::insert(int index, int value) {
-    if(length < index || index < 0) {
-        return false;
-    }
+void LinkedList::removeNode(int index){
+    if(index < 0 || index >= length) return;
 
     if(index == 0) {
-        prepend(value);
+        removeFirst();
     }
-    else if(index == length) {
-         append(value);
-     }
+    else if(index == length-1) {
+        removeLast();
+    }
     else {
         Node* temp = head;
         Node* prev = nullptr;
@@ -202,9 +200,77 @@ bool LinkedList::insert(int index, int value) {
             temp = temp->next;
         }
 
-        prev->next = new Node(value,temp);
+        if(prev!= nullptr) {
+            prev->next = temp->next;
+        }
+        delete temp;
+        length--;
+    }
+}
+
+bool LinkedList::insert(int index, int value) {
+    if (length < index || index < 0) {
+        return false;
+    }
+
+    if (index == 0) {
+        prepend(value);
+    } else if (index == length) {
+        append(value);
+    } else {
+        Node *temp = head;
+        Node *prev = nullptr;
+
+        for (int i = 0; i < index; i++) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        prev->next = new Node(value, temp);
         length++;
     }
     return true;
 }
+
+Node *LinkedList::get(int index) {
+    if (index < 0 || index >= length) {
+        return nullptr;
+    }
+    Node *temp = head;
+    for(int i = 0; i < index; i++) {
+        temp = temp->next;
+    }
+    return temp;
+}
+
+bool LinkedList::set(int index, int value) {
+    Node* temp = get(index);
+    if(temp) {
+        temp->value = value;
+        return true;
+    }
+    return false;
+}
+
+void LinkedList::reverse() {
+    //Swap head and tail
+    Node* temp = head;
+    head = tail;
+    tail = temp;
+
+    Node* after = temp->next;
+    Node* before = nullptr;
+
+    for(int i = 0; i < length; i++) {
+        //get the node after temp
+        after = temp->next;
+
+        //swap the direction of the next ptr
+        temp->next = before;
+
+        before = temp;
+        temp = after;
+    }
+}
+
 

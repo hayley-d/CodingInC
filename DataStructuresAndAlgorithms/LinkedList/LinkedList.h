@@ -26,7 +26,12 @@ public:
     int removeFirst();
     int removeLast();
     int removeValue(int value);
+    void removeNode(int index);
     bool contains(int value);
+    Node* get(int index);
+    bool set(int index,int value);
+
+    void reverse();
 };
 
 
