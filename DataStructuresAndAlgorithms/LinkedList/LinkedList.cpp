@@ -273,4 +273,113 @@ void LinkedList::reverse() {
     }
 }
 
+Node *LinkedList::findMiddleNode() {
+    if(head == nullptr) {
+        return head;
+    }
+    int middleIndex = length/2;
+
+    Node* temp = head;
+
+    for(int i = 0; i < middleIndex; i++) {
+        temp = temp->next;
+    }
+
+    return temp;
+}
+
+bool LinkedList::hasLoop() {
+    if(head == nullptr) return false;
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+ * returns the kth node from the end of the list with out using the length
+ */
+Node *LinkedList::findKthFromEnd(int k) {
+    int length = 0;
+
+    Node* temp = head;
+
+    while(temp) {
+        length++;
+        temp = temp->next;
+    }
+
+    if(k > length) return nullptr;
+
+    temp = head;
+    int index = length - k;
+    for(int i = 0; i < index;i++) {
+        temp = temp->next;
+    }
+
+    return temp;
+}
+
+/*
+ * For this problem its assumed that there is no tail pointer
+ * all nodes with a value less than x come before nodes with a value greater than/equal to x
+ * can use length variable
+ */
+void LinkedList::partitionList(int x) {
+    if(!head) return;
+
+    Node* beforeStart = nullptr;
+    Node* beforeEnd = nullptr;
+    Node* afterStart = nullptr;
+    Node* afterEnd = nullptr;
+    Node* temp = head;
+
+    while(temp) {
+        Node* next = temp->next;
+        temp->next = nullptr; //detaches the current node from the list
+
+        if(temp->value < x) {
+            if(!beforeStart) {
+                beforeStart = temp;
+                beforeEnd = temp;
+            }
+            else {
+                beforeEnd->next = temp;
+                beforeEnd = temp;
+            }
+        }
+        else {
+            if(!afterStart) {
+                afterStart = temp;
+                afterEnd = temp;
+            }
+            else {
+                afterEnd->next = temp;
+                afterEnd = temp;
+            }
+        }
+        temp = next;
+    }
+
+    if(!beforeStart) {
+        head = afterStart;
+        return;
+    }
+
+    beforeEnd->next = afterStart;
+    head = beforeStart;
+}
+
+
+
+
+
 
