@@ -23,6 +23,10 @@ public:
     void prepend(int value);
     bool insert(int index,int value);
     void printList();
+    int removeFirst();
+    int removeLast();
+    int removeValue(int value);
+    bool contains(int value);
 };
 
 

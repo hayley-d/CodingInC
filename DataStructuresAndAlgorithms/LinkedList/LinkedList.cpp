@@ -42,7 +42,6 @@ void LinkedList::printList() {
         std::cout<<temp->value<<std::endl;
         temp = temp->next;
     }
-    delete temp;
 }
 
 bool LinkedList::contains(int value) {
@@ -54,11 +53,9 @@ bool LinkedList::contains(int value) {
 
     while(temp) {
         if(temp->value == value) {
-            delete temp;
             return true;
         }
     }
-    delete temp;
     return false;
 }
 
