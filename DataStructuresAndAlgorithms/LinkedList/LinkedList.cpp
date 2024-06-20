@@ -378,6 +378,96 @@ void LinkedList::partitionList(int x) {
     head = beforeStart;
 }
 
+/*
+ * Leet code problem, this list will not allow you to add duplicates but for the purpose of practice lets assume otherwise
+ */
+void LinkedList::removeDuplicates() {
+    if(length == 0) return;
+
+    Node* temp = head;
+    Node* runner = nullptr;
+    Node* prev = nullptr;
+
+    while(temp && temp->next){
+        runner = temp;
+        while(runner->next) {
+            if(runner->next->value == temp->value) {
+                //delete the duplicate
+                Node* dup = runner->next;
+                runner->next = runner->next->next;
+                delete dup;
+                length--;
+            }
+            else {
+                runner = runner->next;
+            }
+        }
+        temp = temp->next;
+    }
+}
+
+/*
+ * Each element in the list represents a 1 or 0
+ * convert the binary number into a decimal
+ */
+int LinkedList::binaryToDecimal() {
+    if(length == 0) return 0;
+
+    int num = 0;
+    Node* temp = head;
+    for(int i = 0; i < length; i++) {
+        num = num * 2 + temp->value;
+        temp = temp->next;
+    }
+
+    return num;
+}
+
+/*
+ * revers the from index m to index n
+ */
+void LinkedList::reverseBetween(int m, int n) {
+    if(length == 0 || m < 0 || m >= length || n < m || n < 0 || n >= length) return;
+
+    Node* temp = head;
+    Node* start = nullptr;
+    Node* beforeStart = nullptr;
+
+    //Traverse to the node befor the start of the reversal
+    for(int i = 0; i < m && temp; i++) {
+        beforeStart = temp;
+        temp = temp->next;
+    }
+
+    start = temp;
+
+    Node* prev = nullptr;
+    Node* curr = start;
+    Node* next = nullptr;
+
+    for(int i = m; i <= n && curr;i++) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    //prev poits to the new head of reversed list
+    //start points to tail of revsersed list
+
+    if(beforeStart) {
+        beforeStart->next = prev;
+    }
+    else {
+        head = prev;
+    }
+
+    start->next = curr;
+}
+
+
+
+
 
 
 

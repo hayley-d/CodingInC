@@ -35,6 +35,9 @@ public:
     bool hasLoop();
     Node* findKthFromEnd(int k);
     void partitionList(int x);
+    void removeDuplicates();
+    int binaryToDecimal();
+    void reverseBetween(int m, int n);
 };
 
 
