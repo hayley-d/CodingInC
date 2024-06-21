@@ -4,10 +4,29 @@
 
 #include "LinkedList.h"
 
-LinkedList::LinkedList(){}
-LinkedList::LinkedList(int value){}
+//Constructor
+LinkedList::LinkedList() {
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->length = 0;
+}
 
-LinkedList::~LinkedList(){}
+//Constructor
+LinkedList::LinkedList(int value) {
+    this->head = new Node(value);
+    this->tail = head;
+    this->length = 1;
+}
+
+// Destructor
+LinkedList::~LinkedList() {
+    Node* temp = head;
+    while(head) {
+        head = head->next;
+        delete temp;
+        temp = head;
+    }
+}
 
 bool LinkedList::contains(int value){}
 Node* LinkedList::get(int index){}
