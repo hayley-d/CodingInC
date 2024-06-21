@@ -31,10 +31,12 @@ public:
 
     bool removeLast();
     bool removeFirst();
-    bool remove(int value, int index);
-    bool remove(int value);
+    bool remove(int index);
 
-
+    void swapFirstLast();
+    void reverse();
+    bool isPalindrome();
+    void swapPairs();
 
 };
 

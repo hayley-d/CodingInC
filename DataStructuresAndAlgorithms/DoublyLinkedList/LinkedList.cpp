@@ -4,6 +4,8 @@
 
 #include "LinkedList.h"
 
+#include <cmath>
+
 //Constructor
 LinkedList::LinkedList() {
     this->head = nullptr;
@@ -190,3 +192,126 @@ bool LinkedList::remove(int index) {
     length--;
     return true;
 }
+
+/*
+ * Swaps the node of the first and last node in the list
+ */
+void LinkedList::swapFirstLast() {
+    if(length < 2) return;
+    if(length == 2) {
+        Node*temp = head;
+        head = tail;
+        tail = temp;
+
+        head->next = tail;
+        head->prev = nullptr;
+
+        tail->prev = head;
+        tail->next = nullptr;
+
+        return;
+    }
+    Node* beforeTail = tail->prev;
+    Node* afterHead = head->next;
+
+    Node*temp = head;
+    this->head = tail;
+    this->tail = temp;
+
+    afterHead->prev = head;
+    head->next = afterHead;
+    head->prev = nullptr;
+
+    beforeTail->next = tail;
+    tail->prev = beforeTail;
+    tail->next = nullptr;
+}
+
+void LinkedList::reverse() {
+    if(length < 2) return;
+
+    Node* curr = head;
+
+    for(int i = 0; i < length; i++) {
+        Node* temp = curr->prev;
+        curr->prev = curr->next;
+        curr->next = temp;
+        curr = curr->prev;
+    }
+
+    curr = head;
+    head = tail;
+    tail = curr;
+}
+
+/*
+ * list with 0 or 1 nodes is a plaindrome
+ */
+bool LinkedList::isPalindrome() {
+    if(!head || length == 1) return true;
+
+    Node* front = head;
+    Node* end = tail;
+
+    while(front && end) {
+        if(front->value != end->value) {
+            return false;
+        }
+        if(front == end) {
+            return true;
+        }
+        front = front->next;
+        end = end->prev;
+    }
+    return true;
+}
+
+/*
+ * swap each two adjacent nodes
+ * 1->2->3->4 becomes 2->1->4->3
+ * 1->2->3->4->5 becomes 2->1->4->5->3
+ */
+void LinkedList::swapPairs() {
+    if(!head || length < 2) return;
+
+    Node* n1 = head;
+    Node* n2 = head->next;
+
+
+
+    while(n1 && n2) {
+        Node* temp = n2->next;
+
+        if(n1 == head) {
+            head = n2;
+        }
+
+        if(n2 == tail) {
+            tail = n1;
+        }
+
+        n2->prev = n1->prev;
+        n2->next = n1;
+        if (n1->prev) {
+            n1->prev->next = n2;
+        }
+        n1->prev = n2;
+        n1->next = temp;
+        if (temp) {
+            temp->prev = n1;
+        }
+
+        n1 = temp;
+        if(n1) {
+            n2 = n1->next;
+            if(!n2) {
+                n2 = n1;
+                n1 = n1->prev;
+            }
+        }
+    }
+}
+
+
+
+
