@@ -12,12 +12,20 @@ public:
     Node* root;
 
     BST();
-    BST(int value);
     ~BST();
+
+    bool contains(int value);
+    void insert(int value);
+    void remove(int value);
+    void DepthFirstSearch();
+    void BredthFirstSearch();
 
 
 private:
     void destory(Node* curr);
+    Node* containsHelper(Node* curr,int value);
+    Node* getParent(Node* curr,int value);
+    Node* getSmallestInSubTree(Node* curr);
 };
 
 
