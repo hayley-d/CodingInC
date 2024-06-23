@@ -3,6 +3,8 @@
 //
 
 #include "BST.h"
+#include <queue>
+#include <iostream>
 
 BST::BST() {
     this->root = nullptr;
@@ -105,6 +107,42 @@ Node *BST::getSmallestInSubTree(Node *curr) {
     if(!curr->left) return curr;
     return getSmallestInSubTree(curr->left);
 }
+
+void BST::BredthFirstSearch() {
+    std::queue<Node*> myQueue;
+    myQueue.push(root);
+
+    while(myQueue.size() > 0) {
+        Node* curr = myQueue.front();
+        myQueue.pop();
+        std::cout << curr->value << " -> ";
+        if(curr->left) {
+            myQueue.push(curr->left);
+        }
+        if(curr->right) {
+            myQueue.push(curr->right);
+        }
+    }
+}
+
+void BST::DepthFirstSearch() {
+    DFSHealper(root);
+}
+
+void BST::DFSHealper(Node *curr) {
+    if(!curr) return;
+    std::cout << curr->value << std::endl;
+    if(curr->left) {
+        DFSHealper(curr->left);
+    }
+    if(curr->right) {
+        DFSHealper(curr->right);
+    }
+    return;
+}
+
+
+
 
 
 

@@ -26,6 +26,7 @@ private:
     Node* containsHelper(Node* curr,int value);
     Node* getParent(Node* curr,int value);
     Node* getSmallestInSubTree(Node* curr);
+    void DFSHealper(Node* curr);
 };
 
 
