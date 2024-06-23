@@ -63,20 +63,64 @@ void BST::insert(int value) {
 
 void BST::remove(int value) {
     if(!contains) return;
+
     Node* temp = root;
-
-    if(temp->value == value) {
-        //update root
-        if(!root->left) {
-            root = root->right;
-        }
-        else if(!root->right) {
-            root = root->left;
-        }
-    }
-
     Node* parent = getParent(root,value);
 
+    if(!parent) {
+        if(root->value == value) {
+            //update root
+            if(!root->left) {
+                root = root->right;
+            }
+            else if(!root->right) {
+                root = root->left;
+            }else {
+                Node* leftNode = root->left;
+                root = root->right;
+                Node* smallestNode = getSmallestInSubTree(root);
+                smallestNode->left = leftNode;
+            }
+            delete temp;
+            return;
+        }
+        return;
+    }
+    else if(parent->left->value != value || parent->right->value != value) return;
+
+
+    if(parent->left->value == value) {
+        Node* nodeToDelete = parent->left;
+
+        if(!nodeToDelete->left){
+            parent->left = nodeToDelete->right;
+        }
+        else if(!nodeToDelete->right) {
+            parent->left = nodeToDelete->left;
+        }
+        else {
+            Node* smallestNode = getSmallestInSubTree(nodeToDelete->right);
+            smallestNode->left = nodeToDelete->left;
+            parent->left = nodeToDelete->right;
+        }
+        delete nodeToDelete;
+    }
+    else {
+        Node* nodeToDelete = parent->right;
+
+        if(!nodeToDelete->left){
+            parent->right = nodeToDelete->right;
+        }
+        else if(!nodeToDelete->right) {
+            parent->right = nodeToDelete->left;
+        }
+        else {
+            Node* smallestNode = getSmallestInSubTree(nodeToDelete->right);
+            smallestNode->left = nodeToDelete->left;
+            parent->right = nodeToDelete->right;
+        }
+        delete nodeToDelete;
+    }
 }
 
 
