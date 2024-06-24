@@ -185,6 +185,50 @@ void BST::DFSHealper(Node *curr) {
     return;
 }
 
+void BST::deleteNode(int value) {
+    if(!contains(value)) return;
+
+    root = deleteHelper(root,value);
+}
+
+Node *BST::deleteHelper(Node *curr, int value) {
+    if(!curr) return nullptr;
+    if(value < curr->value) {
+        curr->left = deleteHelper(curr->left,value);
+    }
+    else if(value > curr->value) {
+        curr->right = deleteHelper(curr->right,value);
+    }
+    else if(value == curr->value) {
+        if(!curr->left && !curr->right) {
+            delete curr;
+            return nullptr;
+        }
+        else if(curr->left && !curr->right) {
+            Node* temp = curr->left;
+            delete curr;
+            return temp;
+        }
+        else if(!curr->left && curr->right) {
+            Node* temp = curr->right;
+            delete curr;
+            return temp;
+        }
+        else {
+            //has both children
+            Node* min = getSmallestInSubTree(curr->right);
+            Node* temp = curr->left;
+            min->left = temp;
+            delete curr;
+            return min;
+        }
+    }
+
+    return curr;
+}
+
+
+
 
 
 

@@ -19,6 +19,7 @@ public:
     void remove(int value);
     void DepthFirstSearch();
     void BredthFirstSearch();
+    void deleteNode(int value);
 
 
 private:
@@ -27,6 +28,7 @@ private:
     Node* getParent(Node* curr,int value);
     Node* getSmallestInSubTree(Node* curr);
     void DFSHealper(Node* curr);
+    Node* deleteHelper(Node* curr,int value);
 };
 
 
