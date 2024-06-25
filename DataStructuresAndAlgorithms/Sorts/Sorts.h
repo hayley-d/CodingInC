@@ -16,7 +16,8 @@ public:
    void mergeSort(std::vector<int>& arr);
 
 private:
-   void mergeSortHelper();
+   void merge(std::vector<int>& arr, int leftIndex, int midIndex,int rightIndex);
+   void mergeSortHelper(std::vector<int>& arr, int leftIndex,int rightIndex);
 };
 
 
