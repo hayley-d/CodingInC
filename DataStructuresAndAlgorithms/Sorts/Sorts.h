@@ -18,6 +18,9 @@ public:
 private:
    void merge(std::vector<int>& arr, int leftIndex, int midIndex,int rightIndex);
    void mergeSortHelper(std::vector<int>& arr, int leftIndex,int rightIndex);
+   int pivot(std::vector<int>& arr, int pivotIndex, int endIndex);
+   void quickSort(std::vector<int>& arr,int leftIndex, int rightIndex);
+   void swap(std::vector<int>& arr, int firstIndex, int secondIndex);
 };
 
 

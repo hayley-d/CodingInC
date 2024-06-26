@@ -109,6 +109,35 @@ void Sorts::mergeSortHelper(std::vector<int> &arr, int leftIndex, int rightIndex
     merge(arr,leftIndex,midIndex,rightIndex);
 }
 
+int Sorts::pivot(std::vector<int>& arr, int pivotIndex, int endIndex) {
+    int swapIndex = pivotIndex;
+    for(int i = pivotIndex+1; i <= endIndex; i++) {
+        if(arr[i] < arr[pivotIndex]) {
+            swapIndex++;
+            swap(arr,swapIndex,i);
+        }
+    }
+    swap(arr,pivotIndex,swapIndex);
+    return swapIndex;
+}
+
+void Sorts::quickSort(std::vector<int> &arr,int leftIndex,int rightIndex) {
+    if(leftIndex >= rightIndex) return;
+
+    int pivotIndex = pivot(arr,leftIndex,rightIndex);
+    quickSort(arr,leftIndex,pivotIndex-1);
+    quickSort(arr,pivotIndex+1,rightIndex);
+}
+
+void Sorts::swap(std::vector<int> &arr, int firstIndex, int secondIndex) {
+    int temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+}
+
+
+
+
 
 
 
