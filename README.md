@@ -3,7 +3,7 @@
 <h1>C++ Coding</h1>
 <p>Me practicing C++</p>
 
-
+</div>
 ## :toolbox: Getting Started
 
 ### :bangbang: Prerequisites
