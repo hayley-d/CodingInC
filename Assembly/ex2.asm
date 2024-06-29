@@ -1,8 +1,8 @@
-global _start
+global _start ; makes the _start label available to the linker
 
 section .data
-    msg db "Hello world!", 0x0a
-    len equ $-msg
+    msg db "Hello world!", 0x0a ; Defines a null-terminated string followed by a newline char (0x0a)
+    len equ $-msg ;Calculates the length of the string by subtracting the address of msg from the current address ($).
 
 section .text
 _start:
