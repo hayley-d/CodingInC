@@ -1,0 +1,32 @@
+This is the explination of the assembly code for part1.asm
+
+global _start
+This line defines the entry point for the program.
+The global keyword makes an identifier accessible to the linker.
+
+_start:
+This is the identifier followed by a colon which creates a label.
+This is used to name locations in the code
+
+MOV eax, 1
+This moves 1 into the eax register
+
+MOV ebx, 42
+This moves 42 into the ebx register
+
+SUB ebx, 29
+this line will subtract 29 from 42 and store the result in the ebx register
+
+INT 0x80
+This performs an interrupt.
+The processor transfer control to an interrupt handler which is specified by the value 0x80
+This is the interrupt handler for system calls
+The system call that is made is determined by the eax register.
+the value 1 means system exit call
+The value stored in the ebx is thr exit status for the program it can be any integer, in this case it
+is 13 (42-29)
+
+Run using:
+nasm -f elf32 part1.asm -o part1.o
+ld -m elf_i386 part1.o -o part1
+./part1
