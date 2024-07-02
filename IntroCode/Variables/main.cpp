@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "Url.h"
+
 int passByValue(int y) {
     std::cout << "This is the address of y: " << &y << std::endl;
     return y; //creates another copy of y
@@ -32,6 +34,16 @@ int main() {
 
     passByReference(x);
     std::cout << "The value of x is " << x << std::endl;
+
+    int* ptr = new int{36}; //Allocates memory for a single int
+    *ptr = 5;
+    delete ptr;
+    int* arr = new int[10]; //Allocates memory for an array of 10 ints on heap
+    delete [] arr;
+
+
+    Url* url = new Url("https","www.example.com/index.html");
+    std::cout << url->display() << std::endl;
 
 
 
