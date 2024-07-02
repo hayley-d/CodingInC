@@ -14,6 +14,10 @@ void passByReference(int& y) {
     y = 10;
 }
 
+void constRef(const int& y) {
+    std::cout << "This is the value of the const ref: " << y << std::endl;
+}
+
 int main() {
     int x = 7; //create a local variable
     int z = passByValue(x); // creates another copy
@@ -28,6 +32,7 @@ int main() {
 
     passByReference(x);
     std::cout << "The value of x is " << x << std::endl;
+
 
 
     return 0;
