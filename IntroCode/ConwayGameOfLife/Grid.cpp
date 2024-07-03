@@ -50,9 +50,46 @@ bool Grid::willSurvive(int row, int col) {
 }
 
 bool Grid::willCreate(int row, int col) {
-    if(cells)
+    if(cells[row][col].isAlive()) {
+        return false;
+    }
+
+    int parents = cells[row-1][col-1].isAlive() +
+        cells[row-1][col].isAlive() +
+        cells[row-1][col+1].isAlive() +
+        cells[row][col-1].isAlive() +
+        cells[row][col+1].isAlive() +
+        cells[row+1][col-1].isAlive() +
+        cells[row+1][col].isAlive() +
+        cells[row+1][col+1].isAlive();
+
+    if(parents < min_parents || parents > max_parents) {
+        return false;
+    }
+
+    return true;
 }
 
+void Grid::update(const Grid &other) {
+    for(int i = 1; i < rowMax; i++) {
+        for(int j = 1; j < colMax; j++) {
+            cells[i][j] = other.cells[i][j];
+        }
+    }
+}
+
+void calculate(Grid& old, Grid& newGen) {
+    for(int i = 1; i < rowMax; i++) {
+        for(int j = 1; j < colMax; j++) {
+            if(old.willSurvive(i,j)) {
+                newGen.create(i,j);
+            }
+            else if(old.willCreate(i,j)) {
+                newGen.create(i,j);
+            }
+        }
+    }
+}
 
 
 
