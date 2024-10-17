@@ -49,3 +49,10 @@ int Liters(double time) {
   if(time < 2) return 0;
   return (int)(time/2);
 }
+
+//Optimized/refactored version
+// given the time in hours and you need to return the number of litres if 0.5 liters is drunk every 1 hour
+int Liters(double time) {
+  return (int)(time/2);
+}
+
