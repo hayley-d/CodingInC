@@ -31,3 +31,21 @@ int summation(int num) {
 float opposite(float num) {
   return num * -1;
 }
+
+// given the time in hours and you need to return the number of litres if 0.5 liters is drunk every 1 hour
+int Liters(double time) {
+  int liters = 0;
+  int time_int = (int)time;
+  if(time < 2) return 0;
+  for(int i = 1; i < time_int; i += 2) {
+    liters += 1;
+  }
+  return liters;
+}
+
+//Optimized/refactored version
+// given the time in hours and you need to return the number of litres if 0.5 liters is drunk every 1 hour
+int Liters(double time) {
+  if(time < 2) return 0;
+  return (int)(time/2);
+}
