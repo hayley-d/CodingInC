@@ -56,3 +56,27 @@ int Liters(double time) {
   return (int)(time/2);
 }
 
+// Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+const char* even_or_odd(int number)
+{
+  number %= 2;
+  switch(number) {
+      case 0:
+        return "Even";
+        break;
+      
+      default:
+        return "Odd";
+        break;
+  }
+}
+
+// Refactored
+// Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+const char* even_or_odd(int number)
+{
+  number %= 2;
+  if(number == 0) return "Even";
+  return "Odd";
+}
+
