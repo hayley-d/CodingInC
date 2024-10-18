@@ -38,7 +38,7 @@ void spin_words(const char *sentence, char *result) {
       word_start_index = i + 1; // new word starts at next index if a space
       
     } else if(i == length -1){
-       if(i - word_start_index >= 5){
+       if(i - word_start_index >= 4){
         // reverse word
         int end_index = i;
         int start_index = word_start_index;
@@ -57,6 +57,5 @@ void spin_words(const char *sentence, char *result) {
   
   result[length] = '\0';
 }
-
 
 
