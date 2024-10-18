@@ -1,4 +1,11 @@
 #include <stddef.h>
+#include <stdbool.h>
+
+//If one of the flowers has an even number of petals and the other has an odd number of petals it means they are in love.
+//Write a function that will take the number of petals of each flower and return true if they are in love and false if they aren't.
+bool lovefunc(int flower1, int flower2) {
+  return (flower1%2 == !(flower2%2));
+}
 
 // return a *new, dynamically allocated* array with each element doubled.
 int *maps(const int *arr, size_t size){
