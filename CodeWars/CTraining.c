@@ -93,3 +93,15 @@ const char* even_or_odd(int number)
 {
   return (number % 2) ? "Odd" : "Even";
 }
+
+//Write a function which calculates the average of the numbers in a given list.
+double find_average(const double array[/* length */], unsigned length)
+{
+  if (!length) return 0.0;
+  double avg =0.0;
+  for(int i = 0; i < length; i++){
+    avg += array[i];
+  }
+  avg /= length;
+	return avg;
+}
